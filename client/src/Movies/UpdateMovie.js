@@ -16,22 +16,27 @@ const UpdateMovie = props => {
     //console.log('id',id)
 
     useEffect(() => {
+        axios
+            .get(`http://localhost:5000/api/movies/${id}`)
+            .then(res => setInput(res.data))
+            .catch(err => console.log(err.response));
 
-    input.stars.filter(item => `${item.id}` === id && input.stars.push(item.stars))
-    //console.log(input.stars)
+    
 
-    const movieToUpdate = props.movies.find(item => `${item.id}` === id && item)
+    //const movieToUpdate = props.movies.find(item => `${item.id}` === id && item)
     //console.log(movieToUpdate)
 
-        if (movieToUpdate) {
-            setInput(movieToUpdate)
-        }
-    }, [id, props.movies])
+        // if (movieToUpdate) {
+        //     setInput(movieToUpdate)
+        // }
+    }, [id])
+
+    input.stars.filter(item => `${item.id}` === id && input.stars.push(item.stars))
+    console.log(input.stars)
 
     const handleChange = e => {
         e.preventDefault();
         setInput({
-            ...input,
             [e.target.name]: e.target.value
         })
     }
@@ -42,10 +47,6 @@ const UpdateMovie = props => {
             .put(`http://localhost:5000/api/movies/${id}`, input)
             .then(res => {
                 console.log(res.data)
-                props.setMovieList([
-                    
-                    res.data
-                ])
             })
             .catch(err => console.log(err))
 

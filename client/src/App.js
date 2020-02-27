@@ -49,9 +49,8 @@ const App = () => {
         render={props => (
           <UpdateMovie {...props} 
             setSavedList={setSavedList} 
-            setMovieList={setMovieList}
             list={savedList}
-            movies={movieList} />
+             />
         )}/>      
     </>
   );
